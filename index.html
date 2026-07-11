@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Nook is a private Telegram apartment assistant for finding a place you’ll actually like living in." />
+    <meta property="og:title" content="Nook — apartment search, made human" />
+    <meta property="og:description" content="A private Telegram assistant that finds, compares, and helps you act on better apartments." />
+    <meta property="og:type" content="website" />
+    <title>Nook — apartment search, made human</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="wordmark" href="/" aria-label="Nook home"><span>n</span> nook</a>
+        <a class="nav-link" href="#waitlist">Join the private beta <span aria-hidden="true">↗</span></a>
+      </nav>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">A quieter way to apartment hunt</p>
+        <h1 id="hero-title">Find a place<br /><em>that feels like home.</em></h1>
+        <p class="lede">Nook is a private Telegram assistant that searches the real sources, makes sense of the details, and helps you narrow the noise down to a few good places.</p>
+        <a class="button button-primary" href="#waitlist">Join the waitlist <span aria-hidden="true">→</span></a>
+        <p class="quiet-note">Private beta · South Bay first</p>
+      </section>
+
+      <section class="signal-row" aria-label="Nook features">
+        <article><span class="number">01</span><h2>Tell it what matters</h2><p>Budget, timing, neighborhoods, the things you won’t compromise on.</p></article>
+        <article><span class="number">02</span><h2>Get fewer, better options</h2><p>Nook checks official property sites and explains what it knows—and what it doesn’t.</p></article>
+        <article><span class="number">03</span><h2>Make a decision</h2><p>Save, compare, ask questions, and schedule a tour when you’re ready.</p></article>
+      </section>
+
+      <section class="quote" aria-label="Nook principle">
+        <p>Apartment search should feel like finding your next chapter—not managing a spreadsheet.</p>
+      </section>
+
+      <section class="waitlist" id="waitlist" aria-labelledby="waitlist-title">
+        <div>
+          <p class="eyebrow">Private beta</p>
+          <h2 id="waitlist-title">Be first in the nook.</h2>
+          <p>Leave your email and we’ll review the list as we open access. No marketing list, no noise.</p>
+        </div>
+        <form id="waitlist-form" novalidate>
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+          <input class="honey" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button class="button button-dark" type="submit">Join the waitlist <span aria-hidden="true">→</span></button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <footer><span>© Nook</span><span>Made for the move.</span></footer>
+    <script src="script.js" defer></script>
+  </body>
+</html>
