@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Manage your Nook account and apartment preferences." />
+    <title>Nook account</title>
+  </head>
+  <body>
+    <main class="account-shell">
+      <a class="wordmark" href="/"><span>n</span> nook</a>
+      <section id="login-view" class="account-card">
+        <p class="eyebrow">Private beta</p>
+        <h1>Set up your nook.</h1>
+        <p class="lede">Create an account, set your preferences, and connect your private Telegram chat. Access is approved individually.</p>
+        <div class="auth-actions">
+          <button class="button button-dark" data-provider="google">Continue with Google</button>
+          <button class="button button-light" data-provider="apple">Continue with Apple</button>
+        </div>
+        <div class="divider"><span>or use your phone</span></div>
+        <form id="phone-form" class="stack-form">
+          <label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 555 5555" required />
+          <button class="button button-light" type="submit">Send verification code</button>
+        </form>
+        <form id="otp-form" class="stack-form hidden">
+          <label for="otp">Verification code</label>
+          <input id="otp" name="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required />
+          <button class="button button-dark" type="submit">Verify and continue</button>
+        </form>
+        <p id="auth-message" class="form-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="account-view" class="hidden">
+        <div class="account-heading">
+          <div><p class="eyebrow">Your account</p><h1>Make the search yours.</h1></div>
+          <button id="sign-out" class="text-button">Sign out</button>
+        </div>
+        <div id="access-banner" class="status-card"></div>
+        <form id="profile-form" class="account-card stack-form">
+          <h2>Account details</h2>
+          <label for="display-name">Display name</label>
+          <input id="display-name" required minlength="2" maxlength="120" />
+          <label for="timezone">Timezone</label>
+          <input id="timezone" value="America/Los_Angeles" required />
+          <label for="locale">Locale</label>
+          <input id="locale" value="en-US" required />
+          <button class="button button-dark" type="submit">Save account details</button>
+          <p class="form-message" data-message="profile" role="status"></p>
+        </form>
+        <form id="preferences-form" class="account-card stack-form">
+          <h2>Apartment preferences</h2>
+          <label for="cities">Cities <span class="hint">comma separated</span></label>
+          <input id="cities" placeholder="Sunnyvale, Mountain View" />
+          <label for="rent">Maximum base rent <span class="hint">dollars/month</span></label>
+          <input id="rent" type="number" min="1" step="50" />
+          <label for="bedrooms">Bedrooms minimum</label>
+          <input id="bedrooms" type="number" min="0" max="10" step="0.5" />
+          <label for="bathrooms">Bathrooms minimum</label>
+          <input id="bathrooms" type="number" min="0" max="10" step="0.5" />
+          <label for="move-in">Move-in date</label>
+          <input id="move-in" type="date" />
+          <label for="must-haves">Must-haves <span class="hint">comma separated</span></label>
+          <input id="must-haves" placeholder="parking, in-unit laundry" />
+          <label for="nice-to-haves">Nice-to-haves <span class="hint">comma separated</span></label>
+          <input id="nice-to-haves" />
+          <label for="deal-breakers">Deal breakers <span class="hint">comma separated</span></label>
+          <input id="deal-breakers" />
+          <button class="button button-dark" type="submit">Save preferences</button>
+          <p class="form-message" data-message="preferences" role="status"></p>
+        </form>
+        <section class="account-card">
+          <h2>Connect Telegram</h2>
+          <p id="telegram-copy">Link a private Telegram conversation after you save your profile.</p>
+          <button id="telegram-link" class="button button-light">Create Telegram link</button>
+          <p class="form-message" data-message="telegram" role="status"></p>
+        </section>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
