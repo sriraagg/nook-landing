@@ -3,7 +3,7 @@ import './app.css';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-const apiBase = import.meta.env.VITE_NOOK_API_URL || 'https://nook-production-eee1.up.railway.app';
+const apiBase = import.meta.env.VITE_NOOK_API_URL || 'https://nook-267305660945.us-west1.run.app';
 const configured = Boolean(supabaseUrl && supabaseKey);
 const supabase = configured
   ? createClient(supabaseUrl, supabaseKey, { auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true } })

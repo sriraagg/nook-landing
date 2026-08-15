@@ -1,6 +1,6 @@
 const form = document.querySelector('#waitlist-form');
 const message = document.querySelector('#form-message');
-const apiEndpoint = 'https://nook-production-eee1.up.railway.app/public/waitlist';
+const apiEndpoint = 'https://nook-267305660945.us-west1.run.app/public/waitlist';
 
 form?.addEventListener('submit', async (event) => {
   event.preventDefault();

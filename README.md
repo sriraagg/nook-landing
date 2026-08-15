@@ -9,7 +9,7 @@ waitlist form, and the account onboarding page at `/app`.
 npm install
 VITE_SUPABASE_URL=https://your-project.supabase.co \
 VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_... \
-VITE_NOOK_API_URL=https://nook-production-eee1.up.railway.app \
+VITE_NOOK_API_URL=https://nook-267305660945.us-west1.run.app \
 npm run dev
 ```
 
@@ -24,8 +24,9 @@ client code.
 - Production branch: `main`
 - `VITE_SUPABASE_URL`: the Nook Supabase project URL
 - `VITE_SUPABASE_PUBLISHABLE_KEY`: the project publishable key
-- `VITE_NOOK_API_URL`: the Railway Nook API URL
+- `VITE_NOOK_API_URL`: `https://nook-267305660945.us-west1.run.app`
 
-The custom-domain/DNS connection for `nookmyapartment.com` remains a pending
-infrastructure task. Configure the exact production URL in Supabase Auth before
-enabling Google or Apple OAuth in production.
+The production custom domain is `nookmyapartment.com`. Configure both
+`https://nookmyapartment.com/app.html` and `https://www.nookmyapartment.com/app.html`
+as allowed Supabase Auth redirect URLs before enabling Google or Apple OAuth in
+production.
