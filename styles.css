@@ -272,7 +272,7 @@ h1 em, .coverage h2 em { font-family: 'Playfair Display', serif; font-weight: 50
 .svg-city-marker { filter: url('#marker-shadow'); }
 .svg-city-marker .marker-outer { fill: var(--ink); }
 .svg-city-marker .marker-core { fill: var(--accent); }
-.svg-city-marker .marker-pulse-ring { fill: none; stroke: rgba(32,32,29,.4); stroke-width: 1; transform-origin: center; animation: svg-marker-pulse 3.3s ease-out infinite; }
+.svg-city-marker .marker-pulse-ring { fill: none; stroke: rgba(32,32,29,.4); stroke-width: 1; transform-box: fill-box; transform-origin: center; animation: svg-marker-pulse 3.3s ease-out infinite; }
 .marker-city-label { fill: var(--ink); font: 700 12px 'DM Sans', sans-serif; letter-spacing: -.02em; paint-order: stroke; stroke: rgba(244,242,236,.9); stroke-width: 4px; stroke-linejoin: round; }
 .marker-city-count { fill: rgba(32,32,29,.65); font: 500 7px 'DM Mono', monospace; letter-spacing: .04em; text-transform: uppercase; paint-order: stroke; stroke: rgba(244,242,236,.9); stroke-width: 3px; }
 .svg-neighborhood-marker circle { fill: var(--coral); stroke: rgba(255,255,255,.75); stroke-width: 1; filter: url('#marker-shadow'); }

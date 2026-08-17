@@ -61,6 +61,14 @@ function svgElement(name, attributes = {}) {
   return element;
 }
 
+function markerLabelLayout(cityName) {
+  const name = cityName.trim().toLowerCase();
+  if (name === 'mountain view') return { x: -15, y: -5, countY: 8, anchor: 'end' };
+  if (name === 'sunnyvale') return { x: 15, y: -7, countY: 6, anchor: 'start' };
+  if (name === 'cupertino') return { x: -15, y: 17, countY: 30, anchor: 'end' };
+  return { x: 15, y: -2, countY: 11, anchor: 'start' };
+}
+
 function addCoverageMarkers(cities) {
   const markerLayer = document.querySelector('#coverage-markers');
   if (!markerLayer) return;
@@ -76,9 +84,20 @@ function addCoverageMarkers(cities) {
       const pulse = svgElement('circle', { class: 'marker-pulse-ring', r: 15 });
       const outer = svgElement('circle', { class: 'marker-outer', r: 9 });
       const core = svgElement('circle', { class: 'marker-core', r: 4 });
-      const label = svgElement('text', { class: 'marker-city-label', x: 15, y: -2 });
+      const labelLayout = markerLabelLayout(city.name);
+      const label = svgElement('text', {
+        class: 'marker-city-label',
+        x: labelLayout.x,
+        y: labelLayout.y,
+        'text-anchor': labelLayout.anchor,
+      });
       label.textContent = city.name;
-      const count = svgElement('text', { class: 'marker-city-count', x: 15, y: 11 });
+      const count = svgElement('text', {
+        class: 'marker-city-count',
+        x: labelLayout.x,
+        y: labelLayout.countY,
+        'text-anchor': labelLayout.anchor,
+      });
       count.textContent = `${city.propertyCount} tracked`;
       group.append(title, pulse, outer, core, label, count);
       markerLayer.append(group);
