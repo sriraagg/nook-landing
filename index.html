@@ -3,55 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Nook is a private Telegram apartment assistant for finding a place you’ll actually like living in." />
-    <meta property="og:title" content="Nook — apartment search, made human" />
-    <meta property="og:description" content="A private Telegram assistant that finds, compares, and helps you act on better apartments." />
+    <meta name="description" content="Nook is a private Telegram apartment assistant launching across the San Francisco Bay Area." />
+    <meta property="og:title" content="Nook — Bay Area apartment search, made human" />
+    <meta property="og:description" content="A private Telegram assistant for finding, comparing, and touring better Bay Area apartments." />
     <meta property="og:type" content="website" />
-    <title>Nook — apartment search, made human</title>
+    <meta property="og:image" content="/images/bay-area-isometric.webp" />
+    <meta name="theme-color" content="#f4f2ec" />
+    <title>Nook — Bay Area apartment search, made human</title>
+    <link rel="preload" href="/images/bay-area-isometric.webp" as="image" type="image/webp" fetchpriority="high" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main>
       <nav class="nav" aria-label="Primary navigation">
         <a class="wordmark" href="/" aria-label="Nook home"><span>n</span> nook</a>
-        <a class="nav-link" href="/app">Sign in <span aria-hidden="true">↗</span></a>
-        <a class="nav-link" href="#waitlist">Join the private beta <span aria-hidden="true">↗</span></a>
+        <div class="nav-actions">
+          <a class="nav-link" href="#coverage">Live coverage</a>
+          <a class="nav-link" href="/app">Sign in <span aria-hidden="true">↗</span></a>
+          <a class="nav-link nav-join" href="#waitlist">Join the private beta <span aria-hidden="true">↗</span></a>
+        </div>
       </nav>
 
       <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow">A quieter way to apartment hunt</p>
-        <h1 id="hero-title">Find a place<br /><em>that feels like home.</em></h1>
-        <p class="lede">Nook is a private Telegram assistant that searches the real sources, makes sense of the details, and helps you narrow the noise down to a few good places.</p>
-        <a class="button button-primary" href="#waitlist">Join the waitlist <span aria-hidden="true">→</span></a>
-        <p class="quiet-note">Private beta · South Bay first</p>
+        <div class="hero-scene" aria-hidden="true">
+          <div class="scene-image"></div>
+          <div class="scene-fog scene-fog-one"></div>
+          <div class="scene-fog scene-fog-two"></div>
+          <span class="scene-orbit scene-orbit-one"></span>
+          <span class="scene-orbit scene-orbit-two"></span>
+        </div>
+        <div class="hero-copy">
+          <p class="region-pill"><span></span> Now opening in the San Francisco Bay Area</p>
+          <p class="eyebrow">A quieter way to apartment hunt</p>
+          <h1 id="hero-title">Find a place<br /><em>that feels like home.</em></h1>
+          <p class="lede">Nook is your private Telegram apartment assistant—searching real sources across the Bay Area, making sense of the details, and helping you turn a noisy search into a confident shortlist.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#waitlist">Join the Bay Area beta <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="#coverage">Explore live coverage <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="quiet-note">Private beta · Access approved individually</p>
+        </div>
+        <div class="scroll-cue" aria-hidden="true"><span></span> Scroll to explore</div>
       </section>
 
       <section class="signal-row" aria-label="Nook features">
-        <article><span class="number">01</span><h2>Tell it what matters</h2><p>Budget, timing, neighborhoods, the things you won’t compromise on.</p></article>
-        <article><span class="number">02</span><h2>Get fewer, better options</h2><p>Nook checks official property sites and explains what it knows—and what it doesn’t.</p></article>
-        <article><span class="number">03</span><h2>Make a decision</h2><p>Save, compare, ask questions, and schedule a tour when you’re ready.</p></article>
+        <article><span class="number">01</span><h2>Tell it what matters</h2><p>Budget, timing, Bay Area neighborhoods, and the things you won’t compromise on.</p></article>
+        <article><span class="number">02</span><h2>Get broader, better options</h2><p>Nook checks official property sites, surfaces strong and close matches, and explains the tradeoffs.</p></article>
+        <article><span class="number">03</span><h2>Move when it feels right</h2><p>Save, compare, ask questions, and schedule a tour when you’re ready.</p></article>
+      </section>
+
+      <section class="coverage" id="coverage" aria-labelledby="coverage-title">
+        <header class="coverage-heading">
+          <div>
+            <p class="eyebrow">Live Bay Area coverage</p>
+            <h2 id="coverage-title">Know where Nook<br /><em>is looking.</em></h2>
+          </div>
+          <div class="coverage-intro">
+            <p>Nook is starting exclusively in the San Francisco Bay Area. This map reflects active apartment coverage in our database and refreshes as new cities and neighborhoods are added.</p>
+            <p class="coverage-status" id="coverage-status" role="status" aria-live="polite">Loading live coverage…</p>
+          </div>
+        </header>
+
+        <div class="coverage-stats" aria-label="Current coverage summary">
+          <div><strong id="coverage-property-count">—</strong><span>properties tracked</span></div>
+          <div><strong id="coverage-city-count">—</strong><span>cities covered</span></div>
+          <div><strong id="coverage-neighborhood-count">—</strong><span>neighborhoods identified</span></div>
+          <div><strong>5 min</strong><span>live refresh cadence</span></div>
+        </div>
+
+        <div class="coverage-grid">
+          <div class="map-shell">
+            <div id="coverage-map" class="coverage-map" role="img" aria-label="Map of Nook apartment coverage across the San Francisco Bay Area">
+              <svg viewBox="0 0 900 650" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="map-land" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0" stop-color="#e7e4db" />
+                    <stop offset="1" stop-color="#d9ddd3" />
+                  </linearGradient>
+                  <linearGradient id="map-water" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0" stop-color="#9dbebe" />
+                    <stop offset="1" stop-color="#71999a" />
+                  </linearGradient>
+                  <filter id="marker-shadow" x="-100%" y="-100%" width="300%" height="300%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#20201d" flood-opacity=".22" />
+                  </filter>
+                </defs>
+                <rect width="900" height="650" fill="url(#map-land)" />
+                <g class="map-grid-lines">
+                  <path d="M0 130H900M0 260H900M0 390H900M0 520H900" />
+                  <path d="M180 0V650M360 0V650M540 0V650M720 0V650" />
+                </g>
+                <path class="map-water-shape" d="M0 174C70 180 111 162 156 168C204 174 222 123 253 81C296 24 389 35 420 105C443 157 403 195 369 226C346 277 409 334 503 386C604 442 708 501 791 551C821 570 805 599 769 582C651 538 555 481 478 433C377 371 302 331 259 282C222 239 194 212 153 214C99 217 49 237 0 235Z" />
+                <path class="map-shore-line" d="M0 174C70 180 111 162 156 168C204 174 222 123 253 81C296 24 389 35 420 105C443 157 403 195 369 226C346 277 409 334 503 386C604 442 708 501 791 551" />
+                <path class="map-peninsula-line" d="M153 214C194 212 222 239 259 282C302 331 377 371 478 433C555 481 651 538 769 582" />
+                <g class="map-reference-labels">
+                  <text x="72" y="325">PACIFIC OCEAN</text>
+                  <text x="357" y="314" transform="rotate(29 357 314)">SAN FRANCISCO BAY</text>
+                  <text x="721" y="85">EAST BAY</text>
+                  <text x="455" y="555">PENINSULA</text>
+                </g>
+                <g id="coverage-markers"></g>
+              </svg>
+            </div>
+            <div class="map-key" aria-hidden="true"><span class="key-city"></span> City <span class="key-neighborhood"></span> Neighborhood</div>
+            <div class="map-badge"><span></span> Live from Nook</div>
+          </div>
+          <aside class="coverage-directory" aria-labelledby="directory-title">
+            <div class="directory-head">
+              <p class="eyebrow" id="directory-title">Coverage directory</p>
+              <span id="coverage-updated">Live data</span>
+            </div>
+            <div id="coverage-list" class="coverage-list">
+              <div class="coverage-skeleton"></div>
+              <div class="coverage-skeleton short"></div>
+              <div class="coverage-skeleton"></div>
+            </div>
+          </aside>
+        </div>
+        <p class="coverage-note">Coverage shows where Nook has active property sources—not a promise that every building or listing is available today.</p>
       </section>
 
       <section class="quote" aria-label="Nook principle">
-        <p>Apartment search should feel like finding your next chapter—not managing a spreadsheet.</p>
+        <p>Apartment search should feel like finding your next chapter—not managing another spreadsheet.</p>
       </section>
 
       <section class="waitlist" id="waitlist" aria-labelledby="waitlist-title">
         <div>
-          <p class="eyebrow">Private beta</p>
-          <h2 id="waitlist-title">Be first in the nook.</h2>
-          <p>Leave your email and we’ll review the list as we open access. No marketing list, no noise.</p>
+          <p class="eyebrow">San Francisco Bay Area private beta</p>
+          <h2 id="waitlist-title">Be first in<br />the nook.</h2>
+          <p>Leave your email and we’ll review the list as we open access across the Bay Area. No marketing list, no noise.</p>
         </div>
         <form id="waitlist-form" novalidate>
           <label class="sr-only" for="email">Email address</label>
           <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
           <input class="honey" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <button class="button button-dark" type="submit">Join the waitlist <span aria-hidden="true">→</span></button>
+          <button class="button button-dark" type="submit">Join the Bay Area waitlist <span aria-hidden="true">→</span></button>
           <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
         </form>
       </section>
     </main>
-    <footer><span>© Nook</span><span>Made for the move.</span></footer>
+    <footer><span>© Nook</span><span>Made for the Bay Area move.</span></footer>
     <script type="module" src="script.js"></script>
   </body>
 </html>
