@@ -75,7 +75,9 @@ a { color: inherit; }
 .hero::after {
   position: absolute;
   z-index: -1;
-  inset: auto 0 0;
+  right: calc(50% - 50vw);
+  bottom: 0;
+  left: calc(50% - 50vw);
   height: 170px;
   background: linear-gradient(to bottom, transparent, var(--paper));
   content: '';
@@ -86,20 +88,21 @@ a { color: inherit; }
   position: absolute;
   z-index: -2;
   top: -79px;
-  right: calc(clamp(22px, 5vw, 76px) * -1);
+  right: calc(50% - 50vw);
   bottom: 0;
-  left: 32%;
+  left: calc(50% - 50vw);
   overflow: hidden;
   pointer-events: none;
   transform: translate3d(0, var(--scene-scroll), 0);
   will-change: transform;
-  mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
 }
 .scene-image {
   position: absolute;
-  inset: -4% -3% -5% -12%;
-  background-image: linear-gradient(90deg, rgba(244,242,236,.72) 0%, rgba(244,242,236,0) 36%), url('/images/bay-area-isometric.webp');
-  background-position: center;
+  inset: -5% -2% -6%;
+  background-color: var(--paper);
+  background-image: linear-gradient(90deg, rgba(244,242,236,.7) 0%, rgba(244,242,236,.26) 39%, rgba(244,242,236,0) 64%), url('/images/bay-area-isometric.webp');
+  background-position: center center;
+  background-repeat: no-repeat;
   background-size: cover;
   filter: saturate(.9) contrast(.98);
   animation: scene-breathe 14s ease-in-out infinite alternate;
@@ -319,7 +322,7 @@ footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; 
 @media (max-width: 980px) {
   .hero { min-height: 790px; align-items: flex-start; padding-top: 11vh; }
   .hero-copy { width: 72%; }
-  .hero-scene { left: 34%; opacity: .76; }
+  .hero-scene { left: calc(50% - 50vw); opacity: .76; }
   .coverage-heading { grid-template-columns: 1fr; gap: 34px; }
   .coverage-grid { grid-template-columns: 1fr; }
   .map-shell { min-height: 520px; }
@@ -337,7 +340,7 @@ footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; 
   .nav-join { padding-left: 16px; }
   .hero { min-height: 820px; padding: 8vh 0 140px; align-items: flex-start; }
   .hero-copy { width: 100%; }
-  .hero-scene { top: 250px; right: -22px; bottom: 0; left: -22px; opacity: .84; mask-image: linear-gradient(to bottom, transparent 0%, black 23%, black 80%, transparent 100%); }
+  .hero-scene { top: 250px; right: calc(50% - 50vw); bottom: 0; left: calc(50% - 50vw); opacity: .84; mask-image: linear-gradient(to bottom, transparent 0%, black 23%, black 80%, transparent 100%); }
   .scene-image { inset: 0 -28% -4% -43%; background-position: 67% center; background-image: linear-gradient(180deg, var(--paper) 0%, rgba(244,242,236,0) 36%), url('/images/bay-area-isometric.webp'); }
   .region-pill { margin-bottom: 25px; }
   h1 { font-size: clamp(55px, 16vw, 78px); }
