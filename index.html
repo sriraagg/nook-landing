@@ -59,7 +59,7 @@
             <h2 id="coverage-title">Know where Nook<br /><em>is looking.</em></h2>
           </div>
           <div class="coverage-intro">
-            <p>Nook is starting exclusively in the San Francisco Bay Area. This map reflects active apartment coverage in our database and refreshes as new cities and neighborhoods are added.</p>
+            <p>Nook is starting exclusively in the San Francisco Bay Area. The cities below reflect active apartment coverage in our database and update automatically as Nook expands.</p>
             <p class="coverage-status" id="coverage-status" role="status" aria-live="polite">Loading live coverage…</p>
           </div>
         </header>
@@ -67,59 +67,20 @@
         <div class="coverage-stats" aria-label="Current coverage summary">
           <div><strong id="coverage-property-count">—</strong><span>properties tracked</span></div>
           <div><strong id="coverage-city-count">—</strong><span>cities covered</span></div>
-          <div><strong id="coverage-neighborhood-count">—</strong><span>neighborhoods identified</span></div>
           <div><strong>5 min</strong><span>live refresh cadence</span></div>
         </div>
 
-        <div class="coverage-grid">
-          <div class="map-shell">
-            <div id="coverage-map" class="coverage-map" role="img" aria-label="Map of Nook apartment coverage across the San Francisco Bay Area">
-              <svg viewBox="0 0 900 650" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                <defs>
-                  <linearGradient id="map-land" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0" stop-color="#e7e4db" />
-                    <stop offset="1" stop-color="#d9ddd3" />
-                  </linearGradient>
-                  <linearGradient id="map-water" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0" stop-color="#9dbebe" />
-                    <stop offset="1" stop-color="#71999a" />
-                  </linearGradient>
-                  <filter id="marker-shadow" x="-100%" y="-100%" width="300%" height="300%">
-                    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#20201d" flood-opacity=".22" />
-                  </filter>
-                </defs>
-                <rect width="900" height="650" fill="url(#map-land)" />
-                <g class="map-grid-lines">
-                  <path d="M0 130H900M0 260H900M0 390H900M0 520H900" />
-                  <path d="M180 0V650M360 0V650M540 0V650M720 0V650" />
-                </g>
-                <path class="map-water-shape" d="M0 174C70 180 111 162 156 168C204 174 222 123 253 81C296 24 389 35 420 105C443 157 403 195 369 226C346 277 409 334 503 386C604 442 708 501 791 551C821 570 805 599 769 582C651 538 555 481 478 433C377 371 302 331 259 282C222 239 194 212 153 214C99 217 49 237 0 235Z" />
-                <path class="map-shore-line" d="M0 174C70 180 111 162 156 168C204 174 222 123 253 81C296 24 389 35 420 105C443 157 403 195 369 226C346 277 409 334 503 386C604 442 708 501 791 551" />
-                <path class="map-peninsula-line" d="M153 214C194 212 222 239 259 282C302 331 377 371 478 433C555 481 651 538 769 582" />
-                <g class="map-reference-labels">
-                  <text x="72" y="325">PACIFIC OCEAN</text>
-                  <text x="357" y="314" transform="rotate(29 357 314)">SAN FRANCISCO BAY</text>
-                  <text x="721" y="85">EAST BAY</text>
-                  <text x="455" y="555">PENINSULA</text>
-                </g>
-                <g id="coverage-markers"></g>
-              </svg>
-            </div>
-            <div class="map-key" aria-hidden="true"><span class="key-city"></span> City <span class="key-neighborhood"></span> Neighborhood</div>
-            <div class="map-badge"><span></span> Live from Nook</div>
+        <section class="coverage-directory" aria-labelledby="directory-title">
+          <div class="directory-head">
+            <p class="eyebrow" id="directory-title">Currently available in</p>
+            <span id="coverage-updated">Live data</span>
           </div>
-          <aside class="coverage-directory" aria-labelledby="directory-title">
-            <div class="directory-head">
-              <p class="eyebrow" id="directory-title">Coverage directory</p>
-              <span id="coverage-updated">Live data</span>
-            </div>
-            <div id="coverage-list" class="coverage-list">
-              <div class="coverage-skeleton"></div>
-              <div class="coverage-skeleton short"></div>
-              <div class="coverage-skeleton"></div>
-            </div>
-          </aside>
-        </div>
+          <div id="coverage-list" class="coverage-list">
+            <div class="coverage-skeleton"></div>
+            <div class="coverage-skeleton short"></div>
+            <div class="coverage-skeleton"></div>
+          </div>
+        </section>
         <p class="coverage-note">Coverage shows where Nook has active property sources—not a promise that every building or listing is available today.</p>
       </section>
 
