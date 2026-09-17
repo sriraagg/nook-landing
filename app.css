@@ -14,8 +14,14 @@
 .divider { display: flex; align-items: center; gap: 12px; color: #666c61; font-size: .8rem; margin: 24px 0 16px; }
 .divider::before, .divider::after { content: ''; height: 1px; background: rgba(38, 43, 36, .16); flex: 1; }
 .hint { color: #73786f; font-weight: 400; }
+.card-copy { color: #666c61; line-height: 1.5; margin: 0 0 8px; }
+.key-state { margin: 0 0 8px; }
+.key-state.missing { color: #666c61; }
+.key-state.invalid { color: #8a3a2a; }
+.key-state.connected { color: #3f5d3a; }
 .text-button { border: 0; background: transparent; text-decoration: underline; cursor: pointer; padding: 8px 0; }
 .status-card { border-radius: 14px; padding: 16px 18px; margin: 18px 0; background: #e9e4d8; }
 .status-card.approved { background: #dcebd9; }
 .status-card.rejected, .status-card.suspended { background: #f2deda; }
+.account-shell .button:disabled { cursor: not-allowed; opacity: .45; transform: none; }
 .hidden { display: none !important; }

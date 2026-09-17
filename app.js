@@ -16,6 +16,7 @@ const authMessage = $('#auth-message');
 let phoneForOtp = '';
 let account = null;
 let preferences = null;
+let llmKey = null;
 
 function message(target, text) {
   const node = typeof target === 'string' ? $(`[data-message="${target}"]`) : target;
@@ -33,8 +34,25 @@ async function api(path, options = {}) {
     headers: { 'content-type': 'application/json', ...(options.headers || {}), ...(data.session ? { authorization: `Bearer ${data.session.access_token}` } : {}) },
   });
   const body = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(body.error || 'Request failed');
+  if (!response.ok) {
+    const detail = body.error || body.message;
+    throw new Error((Array.isArray(detail) ? detail[0] : detail) || 'Request failed');
+  }
   return body;
+}
+
+function readLlmKey(result) {
+  const key = result?.llmKey;
+  if (!key || typeof key !== 'object') return { connected: false, lastFour: null, status: 'missing' };
+  return {
+    connected: Boolean(key.connected),
+    lastFour: key.lastFour || null,
+    status: key.status || (key.connected ? 'valid' : 'missing'),
+  };
+}
+
+function llmKeyReady(key = llmKey) {
+  return Boolean(key?.connected) && key.status !== 'invalid' && key.status !== 'missing';
 }
 
 async function loadAccount() {
@@ -51,6 +69,7 @@ async function loadAccount() {
   try {
     const result = await api('/api/v1/me');
     account = result.account;
+    llmKey = readLlmKey(result);
     const prefResult = await api('/api/v1/preferences');
     preferences = prefResult.preferences;
     renderAccount();
@@ -67,9 +86,14 @@ function renderAccount() {
   $('#locale').value = account.locale || 'en-US';
   const status = $('#access-banner');
   status.className = `status-card ${account.accessStatus}`;
-  status.textContent = account.accessStatus === 'approved'
-    ? 'Your Nook access is approved. Connect Telegram to start your private apartment search.'
-    : 'Your account is set up. Nook access is pending individual approval; you can finish your preferences while you wait.';
+  const approved = account.accessStatus === 'approved';
+  if (approved && llmKeyReady()) {
+    status.textContent = 'Your Nook access is approved. Connect Telegram to start your private apartment search.';
+  } else if (approved) {
+    status.textContent = 'Your Nook access is approved. Connect a valid LLM key, then Telegram, to start searching.';
+  } else {
+    status.textContent = 'Your account is set up. Nook access is pending individual approval; you can finish preferences and add your LLM key while you wait.';
+  }
   $('#cities').value = (preferences.targetCities || []).join(', ');
   $('#rent').value = centsToDollars(preferences.maximumBaseRentCents);
   $('#bedrooms').value = preferences.bedroomsMin ?? '';
@@ -78,6 +102,42 @@ function renderAccount() {
   $('#must-haves').value = (preferences.mustHaveAmenities || []).join(', ');
   $('#nice-to-haves').value = (preferences.niceToHaveAmenities || []).join(', ');
   $('#deal-breakers').value = (preferences.dealBreakers || []).join(', ');
+  renderLlmKey();
+  renderTelegram();
+}
+
+function renderLlmKey() {
+  const state = $('#llm-key-state');
+  if (!state) return;
+  state.className = 'key-state';
+  if (!llmKey?.connected || llmKey.status === 'missing') {
+    state.classList.add('missing');
+    state.textContent = 'No key connected yet.';
+    return;
+  }
+  const suffix = llmKey.lastFour ? ` ending in ${String(llmKey.lastFour).slice(-4)}` : '';
+  if (llmKey.status === 'invalid') {
+    state.classList.add('invalid');
+    state.textContent = `The saved key${suffix} is invalid. Paste a working key to replace it.`;
+    return;
+  }
+  state.classList.add('connected');
+  state.textContent = `Connected${suffix}.`;
+}
+
+function renderTelegram() {
+  const copy = $('#telegram-copy');
+  const button = $('#telegram-link');
+  const approved = account?.accessStatus === 'approved';
+  const ready = llmKeyReady();
+  if (!approved) {
+    copy.textContent = 'Telegram linking opens after approval. You can still save preferences and your LLM key.';
+  } else if (!ready) {
+    copy.textContent = 'Connect a valid LLM key before creating a Telegram link.';
+  } else {
+    copy.textContent = 'Link a private Telegram conversation. The link expires in 10 minutes.';
+  }
+  button.disabled = !(approved && ready);
 }
 
 document.querySelectorAll('[data-provider]').forEach((button) => button.addEventListener('click', async () => {
@@ -133,7 +193,43 @@ $('#preferences-form')?.addEventListener('submit', async (event) => {
   } catch (error) { message('preferences', error.message); }
 });
 
+$('#llm-key-form')?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const input = $('#llm-key');
+  const apiKey = input.value.trim();
+  if (!apiKey) {
+    message('llm-key', 'Paste an API key to save.');
+    return;
+  }
+  try {
+    await api('/api/v1/llm-key', { method: 'PUT', body: JSON.stringify({ apiKey }) });
+    input.value = '';
+    try {
+      const me = await api('/api/v1/me');
+      account = me.account;
+      llmKey = readLlmKey(me);
+    } catch {
+      llmKey = { connected: true, lastFour: null, status: 'valid' };
+    }
+    if (!llmKey.connected) llmKey = { ...llmKey, connected: true, lastFour: llmKey.lastFour, status: llmKey.status === 'invalid' ? 'invalid' : 'valid' };
+    renderAccount();
+    message('llm-key', llmKey.status === 'invalid'
+      ? 'Key saved, but it isn’t valid. Paste a working key to replace it.'
+      : 'API key saved.');
+  } catch (error) {
+    message('llm-key', error.message);
+  }
+});
+
 $('#telegram-link')?.addEventListener('click', async () => {
+  if (account?.accessStatus !== 'approved') {
+    message('telegram', 'Telegram linking opens after your access is approved.');
+    return;
+  }
+  if (!llmKeyReady()) {
+    message('telegram', 'Connect a valid LLM key first.');
+    return;
+  }
   try {
     const result = await api('/api/v1/telegram-links', { method: 'POST', body: '{}' });
     $('#telegram-copy').innerHTML = `<a href="${result.url}" target="_blank" rel="noreferrer">Open Telegram to connect Nook</a> · link expires in 10 minutes.`;
