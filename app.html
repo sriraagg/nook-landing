@@ -12,7 +12,7 @@
       <section id="login-view" class="account-card">
         <p class="eyebrow">Private beta</p>
         <h1>Set up your nook.</h1>
-        <p class="lede">Create an account, set your preferences, and connect your private Telegram chat. Access is approved individually.</p>
+        <p class="lede">Create an account, set your preferences, add your LLM API key, and connect Telegram. Access is approved individually.</p>
         <div class="auth-actions">
           <button class="button button-dark" data-provider="google">Continue with Google</button>
           <button class="button button-light" data-provider="apple">Continue with Apple</button>
@@ -69,10 +69,19 @@
           <button class="button button-dark" type="submit">Save preferences</button>
           <p class="form-message" data-message="preferences" role="status"></p>
         </form>
+        <form id="llm-key-form" class="account-card stack-form" method="post" action="#">
+          <h2>LLM API key</h2>
+          <p class="card-copy">The assistant runs on your key, not an operator key.</p>
+          <p id="llm-key-state" class="key-state" role="status"></p>
+          <label for="llm-key">API key</label>
+          <input id="llm-key" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="sk-…" />
+          <button class="button button-dark" type="submit">Save API key</button>
+          <p class="form-message" data-message="llm-key" role="status"></p>
+        </form>
         <section class="account-card">
           <h2>Connect Telegram</h2>
-          <p id="telegram-copy">Link a private Telegram conversation after you save your profile.</p>
-          <button id="telegram-link" class="button button-light">Create Telegram link</button>
+          <p id="telegram-copy">Connect a valid LLM key, then create a private Telegram link after approval.</p>
+          <button id="telegram-link" class="button button-light" type="button" disabled>Create Telegram link</button>
           <p class="form-message" data-message="telegram" role="status"></p>
         </section>
       </section>
