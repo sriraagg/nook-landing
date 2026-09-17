@@ -122,7 +122,7 @@ function renderLlmKey() {
     return;
   }
   state.classList.add('connected');
-  state.textContent = `Connected${suffix}.`;
+  state.textContent = `Connected${suffix}`;
 }
 
 function renderTelegram() {
