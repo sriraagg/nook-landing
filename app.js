@@ -115,10 +115,10 @@ function renderLlmKey() {
     state.textContent = 'No key connected yet.';
     return;
   }
-  const suffix = llmKey.lastFour ? ` ending in ${String(llmKey.lastFour).slice(-4)}` : '';
+  const suffix = llmKey.lastFour ? ` · last four ${String(llmKey.lastFour).slice(-4)}` : '';
   if (llmKey.status === 'invalid') {
     state.classList.add('invalid');
-    state.textContent = `The saved key${suffix} is invalid. Paste a working key to replace it.`;
+    state.textContent = `The saved key${llmKey.lastFour ? ` ending in ${String(llmKey.lastFour).slice(-4)}` : ''} is invalid. Paste a working key to replace it.`;
     return;
   }
   state.classList.add('connected');
